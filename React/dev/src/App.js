@@ -1,23 +1,30 @@
 import React, { useState } from 'react'
+import "./styles/style.css"
+import Paragraph from './components/Paragraph'
 
 function App() {
   const [edit,setEdit] = useState(false)
-  const [header,setHeader] = useState("Заголовок")
+  const [text,setText] = useState("")
   const [textbox,setTextbox] = useState("Заголовок")
+  const [Paragraphs,setParagraphs] = useState([
+
+  ])
+ 
   if (edit === false)
   return (
     <div className="App">
-    <h1 style={{ cursor: 'pointer', userSelect: 'none' }} onDoubleClick={function() { setEdit(true); setTextbox(header) } }>{header}</h1>
-
+      {Paragraphs.map((post,index) => <Paragraph key ={index} Options = {post} ></Paragraph>  )}
+      <img onClick={function() { setTextbox(text) ;setEdit(true);} } src='/images/Paragraph.png'></img>
     </div>
   );
   else return(
     <div className="App">
-    <h1 style={{ cursor: 'pointer', userSelect: 'none' }} onDoubleClick={function() { setEdit(false)} }>{header}</h1>
-    <textarea value={header} onChange={function(event) {setHeader(event.target.value) } }></textarea>
-    <div style={{display: 'flex', gap: '8px'}}>
-      <button  onClick={function() {setEdit(false); } }>Сохранить</button>
-      <button onClick={function() {setEdit(false); setHeader(textbox);}}>Отменить</button>
+     {Paragraphs.map((post,index) => <Paragraph key ={index} Options = {post} ></Paragraph>  )}
+
+    <textarea  onChange={function(event) {setText(event.target.value) } }></textarea>
+    <div className='buttons'>
+      <button  onClick={function() {setEdit(false); Paragraphs.push({Text: text}); } }>Сохранить</button>
+      <button onClick={function() {setEdit(false); setText(textbox);}}>Отменить</button>
     </div>
     </div>
   );

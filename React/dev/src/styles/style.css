@@ -1,0 +1,16 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* размеры элемента включают в себя ширину, высоту, границы и отступы */
+}
+
+.HeaderText {
+    cursor: pointer; /* При наведение курсор становится указательным*/
+    user-select: none; /* При двойном щелчке выделения не будет */
+}
+
+.buttons {
+   display: flex;
+   gap: 27px;
+}
+
