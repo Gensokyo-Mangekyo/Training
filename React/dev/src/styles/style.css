@@ -14,3 +14,8 @@
    gap: 27px;
 }
 
+.TextBox {
+    resize: none;
+    width: 250px;
+    height: 50px;
+}
