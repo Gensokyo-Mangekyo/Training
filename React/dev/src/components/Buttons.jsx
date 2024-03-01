@@ -31,7 +31,12 @@ export default function Buttons() {
 
     return (
     <div id="buttons">
-        {ButtonsFunctions.map((x,index) => <button onClick={x.Func}>{x.Name}</button>)}     
+        {ButtonsFunctions.map((x,index) => <button onClick={x.Func}>{x.Name}</button>)} 
+        <input maxLength={2} defaultValue={20} onBlur={(e) => {
+            var selection = window.getSelection();
+                TextEditor.FontText(selection,e.target.value)
+        } 
+        } ></input>
     </div>
     );
 }

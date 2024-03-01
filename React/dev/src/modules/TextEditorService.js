@@ -17,7 +17,6 @@ export default class TextEditorService {
                     node.replaceWith(textNode);
               }
             })
-            console.log(selection.isCollapsed)
             if (!FoundTag) {
           var boldElement = document.createElement('strong');
           boldElement.appendChild(range.extractContents());
@@ -29,8 +28,12 @@ export default class TextEditorService {
     }
 
     AlignText(selection,Name) {
-        console.log()
         var parentElement = selection.anchorNode.parentElement;
         parentElement.style.textAlign =  Name;
+    }
+
+    FontText(selection,Value) {
+      var parentElement = selection.anchorNode.parentElement;
+      parentElement.style.fontSize = Value;
     }
 }

@@ -35,3 +35,15 @@
     padding: 4px;
     font-size: 15px;
 }
+
+#buttons input {
+    border: 3px solid black;
+    background-color:  darkgrey;
+    color:black;
+    border-radius: 6px;
+    padding: 6px;
+    font-weight: 900;
+    font-size: 12px;
+    max-width: 40px;
+    max-height: 40px;
+}
