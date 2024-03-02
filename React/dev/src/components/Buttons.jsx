@@ -1,5 +1,6 @@
 import React from "react";
 import TextEditorService from "../modules/TextEditorService";
+import DropList from "../UI/DropList";
 export default function Buttons() {
     const TextEditor = new TextEditorService()
     const AlignFunction = function(selection,Name) {
@@ -28,15 +29,20 @@ export default function Buttons() {
         Name: "R"
     },
         ]
+        const FontsArr = []
+        for (let i=8; i < 50; i++) {
+            FontsArr.push(
+                {
+                    Func: function() {var selection = window.getSelection(); TextEditor.FontText(selection,i +"px") },
+                    Name: i +"px"
+                } 
+            )
+        }
 
     return (
     <div id="buttons">
-        {ButtonsFunctions.map((x,index) => <button onClick={x.Func}>{x.Name}</button>)} 
-        <input maxLength={2} defaultValue={20} onBlur={(e) => {
-            var selection = window.getSelection();
-                TextEditor.FontText(selection,e.target.value)
-        } 
-        } ></input>
+        {ButtonsFunctions.map((x) => <button onClick={x.Func}>{x.Name}</button>)} 
+        <DropList Name = "Размер Шрифта" Elements = {FontsArr} ></DropList>
     </div>
     );
 }

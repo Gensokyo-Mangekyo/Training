@@ -28,12 +28,25 @@ export default class TextEditorService {
     }
 
     AlignText(selection,Name) {
-        var parentElement = selection.anchorNode.parentElement;
-        parentElement.style.textAlign =  Name;
+      if (selection.anchorNode.parentElement.tagName == "H1")
+      return
+      let parentElement = selection.anchorNode.parentElement;
+       if (selection.anchorNode.parentElement.tagName == "STRONG") 
+        parentElement = parentElement.parentElement
+        parentElement.style.textAlign = Name;
     }
 
     FontText(selection,Value) {
-      var parentElement = selection.anchorNode.parentElement;
+      if (selection.anchorNode.parentElement.tagName == "H1")
+      return false
+      if (!selection.isCollapsed) {
+      let parentElement = selection.anchorNode.parentElement;
       parentElement.style.fontSize = Value;
+      }
+      else {
+        if (selection.anchorNode.parentElement.tagName == "DIV" || selection.anchorNode.parentElement.tagName == "STRONG" )
+        selection.anchorNode.parentElement.setAttribute("style","Font-Size: " + Value + ";")
+      }
+      return true
     }
 }
