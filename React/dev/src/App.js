@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import "./styles/style.css"
+import "./styles/TextEditor.css"
 import Buttons from './components/Buttons';
 import Nav from './components/Nav';
 
