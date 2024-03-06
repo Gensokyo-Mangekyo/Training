@@ -8,14 +8,28 @@
     "@testing-library/user-event": "^13.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.22.2",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
+  "devDependencies": {
+    "@babel/cli": "7.17.0",
+    "@babel/core": "^7.17.0",
+    "@babel/preset-react": "^7.16.0",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "babel-loader": "^8.2.0",
+    "webpack": "^5.70.0",
+    "webpack-cli": "4.10.0",
+    "webpack-dev-server": "4.11.0"
+  },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "webpack",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "open": "react-scripts start && open http://localhost:3000/",
+    "start": "react-scripts start"
   },
   "eslintConfig": {
     "extends": [
