@@ -44,8 +44,25 @@ export default function Gallery() {
                    
                     const imageUrl = ImagesSrv.GetImageFromBytes(arrayBuffer)
                         const NameImage = imageFile.name.substring(0,imageFile.name.lastIndexOf('.'))
-                        const newImages = [...Images, {Url: imageUrl,Name: NameImage, Data: getFormattedDate() }];
+                        const Date = getFormattedDate()
+                        const newImages = [...Images, {Url: imageUrl,Name: NameImage, Data: Date }];
                         SetImages(newImages)
+                        var byteArray = new Uint8Array(arrayBuffer);
+                        // Преобразуем массив байтов в строку Base64. Не поддерживает большие массивы байтов изображения, что может приводит к переполнению стека вызовов! 
+                        var base64String = btoa(String.fromCharCode.apply(null, byteArray)); 
+                        fetch("http://localhost:5000/PostImage", {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ Bytes: base64String, DateTime: Date, Id: 1, Name: NameImage  })
+                  }).then(response => {
+                    if (response.ok) {
+                        console.log('Image uploaded successfully.');
+                    } else {
+                        console.error('Failed to upload image.');
+                    }
+                })
                   } catch (error) {
                     console.error('Ошибка:', error);
                   }
