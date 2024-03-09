@@ -1,12 +1,14 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import ImageService from "../modules/ImageService"
 import "../styles/Gallery.css"
 import Nav from "../components/Nav"
+import axios from 'axios';
 
 export default function Gallery() {
     const ImagesSrv = new ImageService()
     const [Images,SetImages]  = useState([])
-    
+    const host = "http://localhost:5000";
+
     function getFormattedDate() {
         // Получаем текущую дату
         const currentDate = new Date();
@@ -17,6 +19,17 @@ export default function Gallery() {
         const formattedMonth = month < 10 ? '0' + month : month;
         return `${formattedDay}.${formattedMonth}.${year}`;
       }
+      useEffect(() => {
+
+          try {
+            axios.get(host + '/GetImages').then((response) => { 
+              console.log(response.data)
+              SetImages(response.data)
+      })
+        } catch (error) {
+            alert(error);
+        }
+      }, []);
 
     return( 
         <div>
@@ -45,33 +58,37 @@ export default function Gallery() {
                     const imageUrl = ImagesSrv.GetImageFromBytes(arrayBuffer)
                         const NameImage = imageFile.name.substring(0,imageFile.name.lastIndexOf('.'))
                         const Date = getFormattedDate()
-                        const newImages = [...Images, {Url: imageUrl,Name: NameImage, Data: Date }];
-                        SetImages(newImages)
                         var byteArray = new Uint8Array(arrayBuffer);
-                        // Преобразуем массив байтов в строку Base64. Не поддерживает большие массивы байтов изображения, что может приводит к переполнению стека вызовов! 
-                        var base64String = btoa(String.fromCharCode.apply(null, byteArray)); 
-                        fetch("http://localhost:5000/PostImage", {
+                        var bytesString = "";
+                        byteArray.map((x,index) => { if (index === byteArray.length-1)bytesString += x; else bytesString += x + " ";})
+                        const PostImage = async () => {
+                        await fetch("http://localhost:5000/PostImage", {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'
                             },
-                            body: JSON.stringify({ Bytes: base64String, DateTime: Date, Id: 1, Name: NameImage  })
+                            body: JSON.stringify({ Bytes: bytesString, DateTime: Date, Name: NameImage  })
                   }).then(response => {
-                    if (response.ok) {
-                        console.log('Image uploaded successfully.');
-                    } else {
-                        console.error('Failed to upload image.');
+                    const ImageData = response.ok
+                    if (!response.ok) 
+                    {
+                      const newImages = [...Images, {Url: ImageData.url,Name: ImageData.name, Data: ImageData.dateTime, Id: ImageData.id }];
+                      SetImages(newImages)
                     }
-                })
+                    else
+                    alert('Не удалось загрузить изображение на сервер!');
+                }) 
+                }
+                    PostImage()
                   } catch (error) {
-                    console.error('Ошибка:', error);
+                    alert('Ошибка: ' + error);
                   }
                 }
             } } accept="image/*" type="file"></input>
             </div>
             {
             <div className="Container">
-                {Images.map((x,index) => <div key={index}> <img alt="Не удалось загрузить изображение" className="Image" src={x.Url}></img> <h2> Изображение № {index+1} - '{x.Name}', Дата - {x.Data}  </h2> </div> ) }
+                {Images.map((x,index) => <div key={index}> <img alt="Не удалось загрузить изображение" className="Image" src={host + "/" + x.Url}></img> <h2> Изображение № {index+1} - '{x.Name}', Дата - {x.Data}  </h2> </div> ) }
 
             </div>
 }
