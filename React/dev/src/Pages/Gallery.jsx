@@ -23,14 +23,13 @@ export default function Gallery() {
 
           try {
             axios.get(host + '/GetImages').then((response) => { 
-              console.log(response.data)
               SetImages(response.data)
-      })
+      }).catch((error) => alert("Ошибка получения изображений: " + error.message))
         } catch (error) {
-            alert(error);
+            alert("Произошла ошибка: " + error.message);
         }
       }, []);
-
+    
     return( 
         <div>
              <Nav></Nav>
@@ -54,41 +53,26 @@ export default function Gallery() {
             
                         reader.readAsArrayBuffer(imageFile); //Запускает процесс чтения данных Blob, по завершении, атрибут result будет содержать данные файла в виде ArrayBuffer
                     });
-                   
-                    const imageUrl = ImagesSrv.GetImageFromBytes(arrayBuffer)
+                  
                         const NameImage = imageFile.name.substring(0,imageFile.name.lastIndexOf('.'))
                         const Date = getFormattedDate()
                         var byteArray = new Uint8Array(arrayBuffer);
                         var bytesString = "";
                         byteArray.map((x,index) => { if (index === byteArray.length-1)bytesString += x; else bytesString += x + " ";})
-                        const PostImage = async () => {
-                        await fetch("http://localhost:5000/PostImage", {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({ Bytes: bytesString, DateTime: Date, Name: NameImage  })
-                  }).then(response => {
-                    const ImageData = response.ok
-                    if (!response.ok) 
-                    {
-                      const newImages = [...Images, {Url: ImageData.url,Name: ImageData.name, Data: ImageData.dateTime, Id: ImageData.id }];
-                      SetImages(newImages)
-                    }
-                    else
-                    alert('Не удалось загрузить изображение на сервер!');
-                }) 
-                }
-                    PostImage()
+                   axios.post(host + "/PostImage",{ Bytes: bytesString, DateTime: Date, Name: NameImage  }).then((response) => { 
+                    const ImageData = response.data
+                    const newImages = [...Images, {url: ImageData.url,name: ImageData.name, dataTime: ImageData.dateTime, id: ImageData.id }];
+                    SetImages(newImages)
+                    }).catch((error) => alert("Ошибка сохранения изображения: " + error.message))
                   } catch (error) {
-                    alert('Ошибка: ' + error);
+                    alert("Произошла ошибка: " + error.message);
                   }
                 }
             } } accept="image/*" type="file"></input>
             </div>
             {
             <div className="Container">
-                {Images.map((x,index) => <div key={index}> <img alt="Не удалось загрузить изображение" className="Image" src={host + "/" + x.Url}></img> <h2> Изображение № {index+1} - '{x.Name}', Дата - {x.Data}  </h2> </div> ) }
+                {Images.map((x,index) => <div key={x.id}> <img alt="Не удалось загрузить изображение" className="Image" src={host + "/" + x.url}></img> <h2> Изображение № {index+1} - '{x.name}', Дата - {x.dateTime}  </h2> </div> ) }
 
             </div>
 }
