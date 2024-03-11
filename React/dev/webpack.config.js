@@ -5,7 +5,7 @@ module.exports = {
     mode: "development",
   entry: './src/index.js',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, '../../ASPNET/ASPNET/bin/Debug/net5.0/wwwroot/React'),
     filename: 'bundle.js',
     publicPath: '/'
   },

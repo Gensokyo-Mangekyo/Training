@@ -20,7 +20,7 @@
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "babel-loader": "^8.2.0",
-    "webpack": "^5.70.0",
+    "webpack": "^5.90.3",
     "webpack-cli": "4.10.0",
     "webpack-dev-server": "4.11.0"
   },
