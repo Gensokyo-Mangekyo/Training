@@ -12,6 +12,9 @@ export default function Nav() {
                 <li>
                 <Link to="/Gallery">Галерея</Link>  
                 </li>
+                <li>
+                <Link to="/Goods">Товары</Link>  
+                </li>
             </ul>
 
         </nav>

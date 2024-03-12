@@ -1,0 +1,119 @@
+body {
+	background-color: #eff3f6;
+  }
+  .card {
+    width: 300px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 5px 10px; /* Уменьшили горизонтальный отступ */
+    padding: 20px;
+    overflow: hidden;
+  }
+  .card img {
+    width: 100%;
+	cursor: pointer;
+    border-radius: 5px;
+  }
+  .NameCard {
+    margin-top: 10px;
+    font-size: 18px;
+	font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+	cursor: pointer;
+    text-overflow: ellipsis;
+	font-family: GTEestiPro, Arial, sans-serif;
+  }
+  .Price {
+    margin: 5px 0;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: .4px;
+    line-height: 24px;
+	color: green;
+	display: inline;
+	white-space: nowrap;
+	cursor: pointer;
+	font-family: GTEestiPro, Arial, sans-serif;
+  }
+  .CardsFlex {
+	display: flex;
+    justify-content: center;
+	flex-wrap: wrap;
+	gap: 15px;
+  }
+  
+  .CardsBox {
+	background-color: #fff;
+	border-radius: 32px;
+	padding: 2px 24px;
+  max-width: 75%;
+	margin: 0 auto;
+	margin-bottom: 24px;
+    margin-top: 22px;
+
+  }
+  .CardsBox h1 {
+	margin: 25px
+  }
+  
+  .GoodInfo {
+    background-color: #fff;
+	border-radius: 32px;
+	padding: 2px 24px;
+  max-width: 35%;
+	margin: 0 auto;
+	margin-bottom: 24px;
+    margin-top: 22px;
+  }
+
+a {
+    text-decoration: none;
+    color: black;
+  }
+
+  .container {
+    max-width: 700px;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+  }
+  .image-container {
+    margin-right: 20px;
+    
+  }
+  .image-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+  .info-container {
+    flex: 1;
+  }
+  .info-container h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  .price {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: left;
+  }
+  .description {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 5px;
+  }
+
+  .InfoText {
+    font-size: 20px;
+    line-height: 1.5;
+    margin-bottom: 5px;
+  }
+

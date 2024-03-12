@@ -19,6 +19,8 @@
     padding: 10px;
     height: 900px;
     overflow-y: auto;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
 .Container::-webkit-scrollbar {

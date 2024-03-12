@@ -22,3 +22,8 @@
   nav a:hover {
     color: green;
   }
+
+  nav {
+    margin: 0 auto;
+    max-width: 900px;
+  }
