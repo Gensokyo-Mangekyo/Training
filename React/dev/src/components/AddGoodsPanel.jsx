@@ -1,6 +1,7 @@
 import AddGood from "../UI/AddGood";
 
 
+
 export default function AddGoodsPanel(props) {
 
     const Fields = [{Name: "Наименование", Length: 50 },{Name: "Цена", Length: 8 }
