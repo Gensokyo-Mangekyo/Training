@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ASPNET.Model
+namespace ASPNET.Models
 {
     public class ImageModel
     {

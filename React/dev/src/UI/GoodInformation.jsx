@@ -8,7 +8,7 @@ export default function GoodInformation(props) {
    </div>
 <div className="info-container">
 <h1>{props.Good.Name}</h1>
-<p className="price">{props.Good.Price}</p>
+<p className="price">Цена: {props.Good.Price}₽</p>
 <p className="InfoText">
 Тип: {props.Good.Type}
 </p>

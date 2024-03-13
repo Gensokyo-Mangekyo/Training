@@ -8,7 +8,7 @@ using ASPNET.Entities;
 using System.IO;
 using System.Text;
 using System.Text.Json;
-using ASPNET.Model;
+using ASPNET.Models;
 
 namespace ASPNET.Controllers
 {
@@ -51,5 +51,6 @@ namespace ASPNET.Controllers
         {
             return new JsonResult(applicationContext.Images.OrderBy(item => item.Id).ToList());
         }
+
     }
 }
